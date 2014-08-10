@@ -1,0 +1,18 @@
+---
+driver:
+  name: docker
+  socket: <%= ENV.fetch('DOCKER_HOST', 'unix:///var/run/docker.sock') %>
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: fedora-20
+    driver_config:
+      image: rosstimson/fedora-chef
+      platform: rhel
+      require_chef_omnibus: false
+
+suites:
+  - name: default
+    run_list: recipe[rosstimson-workstation::default]
