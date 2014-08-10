@@ -17,3 +17,6 @@ bin/*
 
 .kitchen/
 .kitchen.local.yml
+
+# Ignore release tarballs produced by `berks package`
+releases/*
