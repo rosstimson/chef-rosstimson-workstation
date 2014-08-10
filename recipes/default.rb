@@ -8,3 +8,4 @@
 #
 
 include_recipe 'rosstimson-base'
+include_recipe 'rosstimson-vim'
