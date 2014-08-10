@@ -22,22 +22,32 @@ export GITHUB_TOKEN=...
 
 ### Release Process
 
+User Berkshelf to package up all cookbooks.
+
 ```
-# User Berkshelf to package up all cookbooks.
 $ bundle exec berks package releases/v0.1.0.tgz
+```
 
-# Tag the release in Git.
+Tag the release in Git.
+
+```
 $ git tag v0.1.0 && git push --tags
+```
 
-# Create the release.
+Create the release.
+
+```
 github-release release \
   --user rosstimson \
   --repo chef-rosstimson-workstation \
   --tag v0.1.0 \
   --name "v0.1.0" \
   --description "Initial release."
+```
 
-# Upload the artefact created by Berkshelf.
+Upload the artefact created by Berkshelf.
+
+```
 github-release upload \
   --user rosstimson \
   --repo chef-rosstimson-workstation \
@@ -49,27 +59,42 @@ github-release upload \
 Provision a Workstation
 -----------------------
 
-```
-# Install Chef (as root user)
-$ sudo su -
-$ curl -L https://www.opscode.com/chef/install.sh | bash
+Install Chef (as root user)
 
-# Prepare chef-client config (you only need to do this once)
+```
+$ sudo su -
+
+$ curl -L https://www.opscode.com/chef/install.sh | bash
+```
+
+Prepare chef-client config (you only need to do this the first time)
+
+```
 $ mkdir ~/.setup
+
 $ cat > ~/.setup/client.rb <<EOF
 log_level :info
 log_location STDOUT
 file_cache_path = '~/.setup/cache'
 cookbook_path = '~/.setup/cookbooks'
 EOL
+```
 
-# Grab the packaged up cookbooks
+Grab the packaged up cookbooks
+
+```
 $ cd /tmp
-$ wget https://github.com/rosstimson/chef-rosstimson-workstation/releases/download/v0.1.0/rosstimson-workstation.tgz
-$ tar xzvf rosstimson-workstation.tgz -C ~/.setup
-$ ~/.setup
 
-# Chef run with chef-client in local mode (with chef-zero).
+$ wget https://github.com/rosstimson/chef-rosstimson-workstation/releases/download/v0.1.0/rosstimson-workstation.tgz
+
+$ tar xzvf rosstimson-workstation.tgz -C ~/.setup && rm rosstimson-workstation.tgz
+```
+
+Chef run with `chef-client` in local mode (with `chef-zero`).
+
+```
+$ cd ~/.setup
+
 $ chef-client -c ~/.setup/client.rb -z -o rosstimson-workstation
 ```
 
