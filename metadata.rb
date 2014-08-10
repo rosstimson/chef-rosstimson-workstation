@@ -7,3 +7,5 @@ long_description 'Installs/Configures rosstimson-workstation'
 version          '0.1.0'
 
 supports         'fedora'
+
+depends          'rosstimson-base'
