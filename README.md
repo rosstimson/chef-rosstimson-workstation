@@ -42,8 +42,35 @@ github-release upload \
   --user rosstimson \
   --repo chef-rosstimson-workstation \
   --tag v0.1.0 \
-  --name "rosstimson-workstation" \
+  --name "rosstimson-workstation.tgz" \
   --file releases/v0.1.0.tgz
+```
+
+Provision a Workstation
+-----------------------
+
+```
+# Install Chef (as root user)
+$ sudo su -
+$ curl -L https://www.opscode.com/chef/install.sh | bash
+
+# Prepare chef-client config (you only need to do this once)
+$ mkdir ~/.setup
+$ cat > ~/.setup/client.rb <<EOF
+log_level :info
+log_location STDOUT
+file_cache_path = '~/.setup/cache'
+cookbook_path = '~/.setup/cookbooks'
+EOL
+
+# Grab the packaged up cookbooks
+$ cd /tmp
+$ wget https://github.com/rosstimson/chef-rosstimson-workstation/releases/download/v0.1.0/rosstimson-workstation.tgz
+$ tar xzvf rosstimson-workstation.tgz -C ~/.setup
+$ ~/.setup
+
+# Chef run with chef-client in local mode (with chef-zero).
+$ chef-client -c ~/.setup/client.rb -z -o rosstimson-workstation
 ```
 
 Development

@@ -23,6 +23,7 @@ GRAPH
     tmux (>= 0.0.0)
     zsh (>= 0.0.0)
   rosstimson-workstation (0.1.0)
+    rosstimson-base (>= 0.0.0)
   runit (1.5.10)
     build-essential (>= 0.0.0)
     yum (~> 3.0)
