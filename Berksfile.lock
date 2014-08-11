@@ -4,7 +4,7 @@ DEPENDENCIES
     revision: 40bbcf128d31fce7de1532087383f4fca149f367
   rosstimson-vim
     git: git://github.com/rosstimson/chef-rosstimson-vim.git
-    revision: b1fc5953d822a4b239f2fa348dfd6cf94c3f67f2
+    revision: 84fdbccdadf58f46c5f554a81398efbce77adb7e
   rosstimson-workstation
     path: .
     metadata: true
